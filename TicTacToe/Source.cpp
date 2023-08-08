@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;	
 
-
 void message();
 void draw(char board[]);
 
