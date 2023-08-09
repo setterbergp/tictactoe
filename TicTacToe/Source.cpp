@@ -146,9 +146,11 @@ bool gameover(char board[], bool* ptrisDraw)
 	//check win
 	for (int i = 0; i < 3; i++)
 	{
+		//checks horisontally
 		if (board[i * 3 + 0] == board[i * 3 + 1] && board[i * 3 + 1] == board[i * 3 + 2] || board[0 * 3 + i] == board[1 * 3 + i] && board[1 * 3 + i] == board[2 * 3 + i])
 			return false;
 	}
+	//checks diagonals
 	if (board[0] == board[4] && board[4] == board[8] || board[2] == board[4] && board[4] == board[6])
 		return false;
 
