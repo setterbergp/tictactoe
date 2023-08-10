@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 using namespace std;	
 
@@ -166,3 +167,4 @@ bool gameover(char board[], bool* ptrisDraw)
 	*ptrisDraw = true;
 	return false;
 }
+*/
