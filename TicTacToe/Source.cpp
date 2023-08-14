@@ -1,49 +1,53 @@
-/*
 #include <iostream>
-using namespace std;	
+using namespace std;
 
 void message();
 void draw(char board[]);
-void play(char* ptrTurn,char board[]);
+void play(char* ptrTurn, char board[]);
 bool gameover(char board[], bool* ptrisDraw);
 
 int main()
 {
-	const int size = 9;
+	//Variables
 	char board[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	char turn = 'X';
 	bool isDraw = false;
 
+	//Pointers
 	bool* ptrisDraw = &isDraw;
 	char* ptrTurn = &turn;
-	
 
+	//Prints a welcome message
 	message();
 
+	//Loop updating the board with player inputs
 	while (gameover(board, ptrisDraw))
 	{
 		draw(board);
 		play(ptrTurn, board);
 	}
 
+	//Prints the board before showing the final result
 	draw(board);
 
-	if (isDraw == false && turn == 'X')
+	//Statements declaring the final result
+	if (isDraw == false && turn == 'O')
 	{
-		cout << "Player2" << endl;
+		cout << "The winner is Player 1" << endl;
 	}
-	else if (isDraw == false && turn == 'O')
+	else if (isDraw == false && turn == 'X')
 	{
-		cout << "Player1" << endl;
+		cout << "The winner is Player 2" << endl;
 	}
 	else
 	{
-		cout << "Draw" << endl;
+		cout << "The game has ended in a draw!" << endl;
 	}
-	
+
 	system("pause");
 }
 
+//Function printing a welcome message
 void message()
 {
 	cout << "TIC TAC TOE" << endl;
@@ -52,6 +56,7 @@ void message()
 	cout << endl << endl;
 }
 
+//Function printing the board
 void draw(char board[])
 {
 	cout << "\t" << board[0] << "\t" << "|" << "\t" << board[1] << "\t" << "|" << "\t" << board[2] << endl;
@@ -63,8 +68,10 @@ void draw(char board[])
 	cout << "\t" << board[6] << "\t" << "|" << "\t" << board[7] << "\t" << "|" << "\t" << board[8] << endl;
 }
 
+//Function handling player input and turns
 void play(char* ptrTurn, char board[])
 {
+
 	int choice;
 	int cell;
 
@@ -87,11 +94,12 @@ void play(char* ptrTurn, char board[])
 		//clears error flags
 		cin.clear();
 
-		//clears the input buffer after failed input operation
+		//clears the input buffer after a failed input operation
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return;
 	}
 
+	//Player choice translated into cell index
 	switch (choice)
 	{
 		case 1:
@@ -101,7 +109,7 @@ void play(char* ptrTurn, char board[])
 			cell = 1;
 			break;
 		case 3:
-			cell= 2;
+			cell = 2;
 			break;
 		case 4:
 			cell = 3;
@@ -121,11 +129,14 @@ void play(char* ptrTurn, char board[])
 		case 9:
 			cell = 8;
 			break;
+
+			//Informs players of invalid inputs (e.g. 64, a, B, etc)
 		default:
 			cout << "\t" << "\t" << "Invalid Choice" << endl;
 			return;
 	}
 
+	//Checks if a cell has been chosen before and updates the array if not
 	if (*ptrTurn == 'X' && board[cell] != 'X' && board[cell] != 'O')
 	{
 		board[cell] = 'X';
@@ -136,35 +147,35 @@ void play(char* ptrTurn, char board[])
 		board[cell] = 'O';
 		*ptrTurn = 'X';
 	}
-	else
-	{
+
+	//Message informing players that the cell has already been chosen in a previous turn
+	else {
 		cout << "\t\tBox already filled!\n\t\tPlease try again!!!\n\n";
 	}
 }
 
-bool gameover(char board[], bool* ptrisDraw)
-{
-	//check win
+bool gameover(char board[], bool* ptrisDraw) {
 	for (int i = 0; i < 3; i++)
 	{
-		//checks horisontally
+		//checks horizontally
 		if (board[i * 3 + 0] == board[i * 3 + 1] && board[i * 3 + 1] == board[i * 3 + 2] || board[0 * 3 + i] == board[1 * 3 + i] && board[1 * 3 + i] == board[2 * 3 + i])
-			return false;
-	}
-	//checks diagonals
-	if (board[0] == board[4] && board[4] == board[8] || board[2] == board[4] && board[4] == board[6])
-		return false;
-
-	//check if any box is not filled
-	for (int i = 0; i < 9; i++)
-	{
-		if (board[i] != 'X' && board[i] != 'O')
 		{
-			return true;
+			return false;
 		}
+		//checks diagonals
+		if (board[0] == board[4] && board[0] == board[8] || board[2] == board[4] && board[2] == board[6])
+		{
+			return false;
+		}
+		//check if any box is not filled
+		for (int i = 0; i < 9; i++)
+		{
+			if (board[i] != 'X' && board[i] != 'O')
+			{
+				return true;
+			}
+		}
+		*ptrisDraw = true;
+		return false;
 	}
-
-	*ptrisDraw = true;
-	return false;
 }
-*/
